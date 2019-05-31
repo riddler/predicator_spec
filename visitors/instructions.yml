@@ -25,3 +25,7 @@ tests:
 - name: and
   source: "true and true"
   instructions: [["lit", true], ["jfalse", 2], ["lit", true]]
+
+- name: var_eq_int
+  source: "score = 100"
+  instructions: [["load", "score"], ["lit", 100], ["compare", "EQ"]]
