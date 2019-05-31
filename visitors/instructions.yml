@@ -1,0 +1,27 @@
+---
+name: instructions
+
+tests:
+- name: true
+  source: "true"
+  instructions: [["lit", true]]
+
+- name: false
+  source: "false"
+  instructions: [["lit", false]]
+
+- name: group
+  source: "(true)"
+  instructions: [["lit", true]]
+
+- name: not
+  source: "!true"
+  instructions: [["lit", true], ["not"]]
+
+- name: or
+  source: "true or true"
+  instructions: [["lit", true], ["jtrue", 2], ["lit", true]]
+
+- name: and
+  source: "true and true"
+  instructions: [["lit", true], ["jfalse", 2], ["lit", true]]
