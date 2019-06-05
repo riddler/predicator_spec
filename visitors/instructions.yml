@@ -29,3 +29,23 @@ tests:
 - name: var_eq_int
   source: "score = 100"
   instructions: [["load", "score"], ["lit", 100], ["compare", "EQ"]]
+
+- name: var_neq_int
+  source: "score != 100"
+  instructions: [["load", "score"], ["lit", 100], ["compare", "NEQ"]]
+
+- name: var_gt_int
+  source: "score > 100"
+  instructions: [["load", "score"], ["lit", 100], ["compare", "GT"]]
+
+- name: var_gte_int
+  source: "score >= 100"
+  instructions: [["load", "score"], ["lit", 100], ["compare", "GTE"]]
+
+- name: var_lt_int
+  source: "score < 100"
+  instructions: [["load", "score"], ["lit", 100], ["compare", "LT"]]
+
+- name: var_lte_int
+  source: "score <= 100"
+  instructions: [["load", "score"], ["lit", 100], ["compare", "LTE"]]
