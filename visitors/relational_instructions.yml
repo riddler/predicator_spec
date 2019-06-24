@@ -1,0 +1,28 @@
+---
+name: relational_instructions
+
+tests:
+- name: var_eq_int
+  source: age = 13
+  instructions: [["load", "age"], ["to_int"], ["lit", 13], ["compare", "EQ"]]
+
+- name: var_gt_int
+  source: age > 13
+  instructions: [["load", "age"], ["to_int"], ["lit", 13], ["compare", "GT"]]
+
+- name: var_gte_int
+  source: age >= 13
+  instructions: [["load", "age"], ["to_int"], ["lit", 13], ["compare", "GTE"]]
+
+- name: var_lt_int
+  source: age < 13
+  instructions: [["load", "age"], ["to_int"], ["lit", 13], ["compare", "LT"]]
+
+- name: var_lte_int
+  source: age <= 13
+  instructions: [["load", "age"], ["to_int"], ["lit", 13], ["compare", "LTE"]]
+
+- name: var_between_int
+  source: age between 13 and 15
+  instructions: [["load", "age"], ["to_int"], ["lit", 13], ["lit", 15], ["compare", "BETWEEN"]]
+
