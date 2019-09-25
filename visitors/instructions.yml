@@ -25,3 +25,27 @@ tests:
 - name: and
   source: "true and true"
   instructions: [["lit", true], ["jfalse", 2], ["lit", true]]
+
+- name: variable_eq_int
+  source: age = 13
+  instructions: [["load", "age"], ["to_int"], ["lit", 13], ["compare", "EQ"]]
+
+- name: variable_eq_string_single_quotes
+  source: plan = 'basic'
+  instructions: [["load", "plan"], ["to_str"], ["lit", "basic"], ["compare", "EQ"]]
+
+- name: variable_eq_string_double_quotes
+  source: plan = "basic"
+  instructions: [["load", "plan"], ["to_str"], ["lit", "basic"], ["compare", "EQ"]]
+
+- name: variable_eq_date
+  source: date = 2019-06-20
+  instructions: [["load", "date"], ["to_date"], ["lit", "2019-06-20"], ["to_date"], ["compare", "EQ"]]
+
+- name: variable_gt_duration_ago
+  source: date > 3d ago
+  instructions: [["load", "date"], ["to_date"], ["lit", 259200], ["date_ago"], ["compare", "GT"]]
+
+- name: variable_gt_duration_from_now
+  source: date > 3d from now
+  instructions: [["load", "date"], ["to_date"], ["lit", 259200], ["date_from_now"], ["compare", "GT"]]
