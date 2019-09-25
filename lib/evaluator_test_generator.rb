@@ -1,7 +1,3 @@
-require "erb"
-require "json"
-require "yaml"
-
 class EvaluatorTestGenerator < TestGenerator
   def self.generate
     project_root = Pathname.new File.expand_path "..", __dir__
@@ -20,34 +16,8 @@ class EvaluatorTestGenerator < TestGenerator
     @test_case = YAML.safe_load File.read input_filename
   end
 
-  def test_case_name
-    test_case["name"]
-  end
-
-  def class_name
-    classify test_case_name
-  end
-
   def instructions
     test_case["instructions"]
-  end
-
-  def tests
-    test_case["tests"]
-  end
-
-  def generate
-    folder = input_filename.dirname.basename.to_s
-    language_settings.each do |(language,settings)|
-      langauge_filename = settings[:filename_template] % test_case_name
-      language_template = settings[:template]
-
-      output_filename = project_root.join *%W[ generated #{language} #{folder} #{langauge_filename} ]
-      puts "Generating #{output_filename.relative_path_from(project_root)}"
-      output_filename.dirname.mkpath unless output_filename.dirname.exist?
-      contents = render language_template
-      File.write output_filename, contents
-    end
   end
 
   private
