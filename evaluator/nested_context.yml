@@ -1,0 +1,13 @@
+---
+name: nested_context
+instructions: [["load", "person.age"], ["to_int"], ["lit", 13], ["compare", "GT"]]
+
+tests:
+- name: with_no_context
+  result: false
+
+- name: with_nested_hash
+  context:
+    person:
+      age: 20
+  result: true
