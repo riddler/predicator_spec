@@ -32,11 +32,22 @@ class TestGenerator
   end
 
   def elixir_hash hash
-    symbolized_keys_hash = hash.transform_keys {|k| k.to_sym}
-    hash_string = symbolized_keys_hash.to_s
+    symbolized_keys_hash = _deep_transform_keys(hash){|k| k.to_sym}
+    symbolized_keys_hash.to_s
       .gsub(/=>/, ": ")
-      .gsub(/([{\s]):/, '\1')
-    "%#{hash_string}"
+      .gsub(/:([^:]+):/, '\1:')
+      .gsub(/{/, "%{")
+  end
+
+  def _deep_transform_keys object, &block
+    case object
+    when Hash
+      object.each_with_object({}) do |(key, value), result|
+        result[yield(key)] = _deep_transform_keys value, &block
+      end
+    else
+      object
+    end
   end
 
   def generate
